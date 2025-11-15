@@ -1,0 +1,63 @@
+{
+    "escola": {
+        "nome": "Etec Cônego José Bento",
+        "endereco": "Av. Nove de Julho, 745 - Jardim Pereira do Amparo, Jacareí - SP, 12327-682",
+        "telefone": "(12) 3951-5800",
+        "diretoria": {
+            "diretor": "Gilson",
+            "vice_diretor": "Nome do Vice-diretor",
+            "coordenador": "Nome do Coordenador"
+        }
+    },
+
+    "horarios": {
+        "diurno": {
+            "entrada": "07:10",
+            "intervalo": "09:00 - 09:20",
+            "saida": "12:30"
+        },
+        "noturno": {
+            "entrada": "18:00",
+            "intervalo": "20:30 - 21:00",
+            "saida": "22:30"
+        }
+    },
+
+    "turmas": {
+        "1DS": {
+            "sala": "Sala 06",
+            "professores": {
+                "matematica": "Profa. Maria Julia",
+                "portugues": "Prof. Roberto",
+                "quimica": "Profa. Ana",
+                "desenvolvimento_sistemas": "Prof. Carlos"
+            }
+        },
+        "2DS": {
+            "sala": "Sala 07",
+            "professores": {
+                "matematica": "Profa. Vanessa",
+                "programacao": "Prof. João"
+            }
+        }
+    },
+
+    "cardapio_refeitorio": {
+        "segunda": "Arroz, feijão, frango grelhado, salada",
+        "terca": "Macarronada com carne moída, salada",
+        "quarta": "Arroz, feijão, carne de panela, legumes",
+        "quinta": "Estrogonofe, arroz, batata palha",
+        "sexta": "Feijoada, arroz, farofa"
+    },
+
+    "eventos": [
+        "Feira tecnológica - Outubro",
+        "Semana Paulo Freire - Setembro",
+        "Simulado ENEM - Junho"
+    ],
+
+    "regras_gerais": [
+        "É obrigatório o uso de uniforme",
+        "É proibido o uso de celular em sala"
+    ]
+}
