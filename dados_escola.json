@@ -1,63 +1,123 @@
 {
-    "escola": {
-        "nome": "Etec Cônego José Bento",
-        "endereco": "Av. Nove de Julho, 745 - Jardim Pereira do Amparo, Jacareí - SP, 12327-682",
-        "telefone": "(12) 3951-5800",
-        "diretoria": {
-            "diretor": "Gilson",
-            "vice_diretor": "Nome do Vice-diretor",
-            "coordenador": "Nome do Coordenador"
-        }
+  "escola": {
+    "nome": "Etec Cônego José Bento",
+    "endereco": "Av. Nove de Julho, 745 - Jardim Pereira do Amparo, Jacareí - SP, 12327-682",
+    "telefone": "(12) 3951-5800",
+    "diretoria": {
+      "diretor": "Gilson",
+      "vice_diretor": "Nome do Vice-diretor",
+      "coordenador": "Nome do Coordenador"
+    }
+  },
+  "horarios": {
+    "diurno": {
+      "entrada": "07:10",
+      "cafe": "09:40 - 10:00",
+      "almoco": "12:30 - 13:30",
+      "saida": "15:00"
     },
-
-    "horarios": {
-        "diurno": {
-            "entrada": "07:10",
-            "intervalo": "09:00 - 09:20",
-            "saida": "12:30"
+    "noturno": {
+      "almoco": "17:30 - 18:00",
+      "entrada": "18:00",
+      "cafe": "20:30 - 21:00",
+      "saida": "22:30"
+    }
+  },
+  "turmas": {
+    "1DS": {
+      "sala": "Sala 10",
+      "professores": {
+        "matematica": "Professor. Fernando",
+        "portugues": "Professora. Elisiane",
+        "quimica": "Professor. Melqsedec",
+        "fisica": "Professora. Ursula",
+        "educacao_fisica": "Professora. Maria Julia",
+        "artes": "Professora. Ana Paula",
+        "programacao_web": "Professor. Carlos - Lab3",
+        "banco_dados": "Professor. Lúcio - Lab4",
+        "design_digital": "Professor. Marcelo Guido - Lab2",
+        "tpa": "Professor. Lúcio - Lab4",
+        "aps": "Professor. Flávio - Lab1"
+      },
+      "horarios_aulas": {
+        "Turma_A": {
+          "Segunda-Feira": {
+            "Artes": "18:00 - 19:40",
+            "portugues": "19:40 - 20:30 | 20:50 - 21:40",
+            "educacao_fisica": "21:40 - 22:30"
+          },
+          "Terca-Feira": {
+            "educacao_fisica": "18:00 - 18:50",
+            "design_digital": "18:50 - 20:30",
+            "programacao_web": "20:50 - 22:30"
+          },
+          "Quarta-Feira": {
+            "portugues": "18:00 - 18:50",
+            "fisica": "18:50 - 20:30",
+            "matematica": "20:50 - 22:30"
+          },
+          "Quinta_Feira": {
+            "tpa": "18:00 - 20:30",
+            "quimica": "20:50 - 22:30"
+          },
+          "Sexta-Feira": {
+            "nao_tem": "entra mais tarde as 18:50",
+            "aps": "20:50 - 22:30",
+            "banco-dados": "18:50 - 20:30"
+          }
         },
-        "noturno": {
-            "entrada": "18:00",
-            "intervalo": "20:30 - 21:00",
-            "saida": "22:30"
+        "turma_B": {
+          "Segunda-Feira": {
+            "Artes": "18:00 - 19:40",
+            "portugues": "19:40 - 20:30 | 20:50 - 21:40",
+            "educacao_fisica": "21:40 - 22:30"
+          },
+          "Terca-Feira": {
+            "educacao_fisica": "18:00 - 18:50",
+            "programacao_web": "18:50 - 20:30",
+            "banco_dados": "20:50 - 22:30"
+          },
+          "Quarta-Feira": {
+            "portugues": "18:00 - 18:50",
+            "fisica": "18:50 - 20:30",
+            "matematica": "20:50 - 22:30"
+          },
+          "Quinta_Feira": {
+            "nao_tem": "entra mais tarde as 18:50",
+            "design_digital": "18:50 - 20:30",
+            "quimica": "20:50 - 22:30"
+          },
+          "Sexta-Feira": {
+            "tpa": "18:00 - 20:30",
+            "aps": "20:50 - 22:30"
+          }
         }
+      }
     },
-
-    "turmas": {
-        "1DS": {
-            "sala": "Sala 06",
-            "professores": {
-                "matematica": "Profa. Maria Julia",
-                "portugues": "Prof. Roberto",
-                "quimica": "Profa. Ana",
-                "desenvolvimento_sistemas": "Prof. Carlos"
-            }
-        },
-        "2DS": {
-            "sala": "Sala 07",
-            "professores": {
-                "matematica": "Profa. Vanessa",
-                "programacao": "Prof. João"
-            }
-        }
+    "2DS": {
+      "sala": "Sala 07",
+      "professores": {
+        "matematica": "Profa. Vanessa",
+        "programacao": "Prof. João"
+      }
     },
-
-    "cardapio_refeitorio": {
-        "segunda": "Arroz, feijão, frango grelhado, salada",
-        "terca": "Macarronada com carne moída, salada",
-        "quarta": "Arroz, feijão, carne de panela, legumes",
-        "quinta": "Estrogonofe, arroz, batata palha",
-        "sexta": "Feijoada, arroz, farofa"
-    },
-
-    "eventos": [
-        "Feira tecnológica - Outubro",
-        "Semana Paulo Freire - Setembro",
-        "Simulado ENEM - Junho"
-    ],
-
-    "regras_gerais": [
-        "É obrigatório o uso de uniforme",
-        "É proibido o uso de celular em sala"
-    ]
+    "3DS": {
+    }
+  },
+  "cardapio_refeitorio": {
+    "segunda": "Arroz, feijão, frango grelhado, salada",
+    "terca": "Macarronada com carne moída, salada",
+    "quarta": "Arroz, feijão, carne de panela, legumes",
+    "quinta": "Estrogonofe, arroz, batata palha",
+    "sexta": "Feijoada, arroz, farofa"
+  },
+  "eventos": [
+    "Feira tecnológica - Outubro",
+    "Semana Paulo Freire - Setembro",
+    "Simulado ENEM - Junho"
+  ],
+  "regras_gerais": [
+    "É obrigatório o uso de uniforme",
+    "É proibido o uso de celular em sala"
+  ]
 }
