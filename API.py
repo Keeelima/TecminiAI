@@ -14,6 +14,7 @@ MODEL = "gemini-2.5-flash"
 with open("dados_escola.json", "r", encoding="utf-8") as f:
     dados = json.load(f)
 
+
 # ======================================================
 # PALAVRÕES PARA BLOQUEAR
 # ======================================================
