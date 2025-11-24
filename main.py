@@ -159,6 +159,7 @@ class ChatApp(ft.Column):
     def _make_link_callback(self, url):
         return lambda e: self.page.launch_url(url)
 
+
     # -----------------------------
     # PARSER DE TEXTO COM:
     # - **negrito**
