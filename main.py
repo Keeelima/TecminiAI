@@ -5,7 +5,6 @@ import flet as ft
 import API
 from usuarios import validar_login, criar_usuario, usuario_existe
 
-
 # ---------------------------------------------------
 # Função segura para UI
 # ---------------------------------------------------
@@ -43,7 +42,8 @@ class ChatApp(ft.Column):
 
         self.send_button = ft.FloatingActionButton(
             icon=ft.Icons.SEND,
-            bgcolor=ft.Colors.BLUE_800,
+            bgcolor="#B20000",  # fundo padrão
+            foreground_color="white",  # cor do ícone
             on_click=self.send_message,
         )
 
@@ -80,7 +80,7 @@ class ChatApp(ft.Column):
             controls=[
                 ft.Container(
                     content=self.format_text(texto),
-                    bgcolor=ft.Colors.BLUE_800,
+                    bgcolor=ft.Colors.with_opacity(0.5,"#B20000" ),
                     padding=10,
                     border_radius=ft.border_radius.all(12),
                     margin=ft.margin.only(left=80),
@@ -131,6 +131,7 @@ class ChatApp(ft.Column):
 
         return ft.Row(controls=parts, spacing=0, wrap=True)
 
+    # noinspection PyMethodMayBeStatic
     def _split_bold_to_texts(self, text):
         """Divide o texto em partes normais e **negrito** e retorna lista de ft.Text"""
         out = []
@@ -172,7 +173,7 @@ class ChatApp(ft.Column):
             controls=[
                 ft.Container(
                     content=ft.Column(controls=content, spacing=5, tight=True),
-                    bgcolor=ft.Colors.GREY_800,
+                    bgcolor=ft.Colors.with_opacity(0.3, "WHITE"),
                     padding=12,
                     border_radius=ft.border_radius.all(12),
                     margin=ft.margin.only(right=80),
@@ -183,11 +184,18 @@ class ChatApp(ft.Column):
 
     # simulador de reply do bot (chamada API)
     def bot_reply(self, user_text):
+        global usuario_logado  # <-- obrigatório para acessar o usuário logado
+
         typing = ft.Row(
             alignment=ft.MainAxisAlignment.START,
             controls=[
                 ft.Container(
-                    content=ft.Text("TecminiAI está digitando...", size=15, italic=True, color=ft.Colors.GREY_500),
+                    content=ft.Text(
+                        "TecminiAI está digitando...",
+                        size=15,
+                        italic=True,
+                        color=ft.Colors.GREY_500
+                    ),
                     padding=10,
                 )
             ],
@@ -197,7 +205,7 @@ class ChatApp(ft.Column):
         self._schedule(lambda: self.show_typing(typing))
 
         try:
-            resposta = API.responder_com_gemini(user_text)
+            resposta = API.responder(user_text, usuario_logado)
         except Exception as e:
             resposta = f"Erro ao gerar resposta: {e}"
 
@@ -232,7 +240,7 @@ def main(page: ft.Page):
     # abrir fullscreen e estilo base
     page.window_full_screen = True
     page.padding = 20
-    page.bgcolor = ft.Colors.BLACK
+    page.bgcolor = "#191919"
     page.theme_mode = ft.ThemeMode.DARK
 
     def carregar_login():
@@ -247,8 +255,15 @@ def main(page: ft.Page):
         error_text = ft.Text("", color=ft.Colors.RED, visible=False)
 
         def tentar_login(e):
-            if validar_login(user_field.value.strip(), pass_field.value.strip()):
-                carregar_chat()
+            global usuario_logado
+
+            user = user_field.value.strip()
+            pwd = pass_field.value.strip()
+
+            if validar_login(user, pwd):
+                usuario_logado = user
+                print("Logado como:", usuario_logado)
+                carregar_chat()  # ← mantém o que já existia
             else:
                 error_text.value = "Usuário ou senha incorretos."
                 error_text.visible = True
@@ -257,9 +272,31 @@ def main(page: ft.Page):
         # set pass_field.on_submit after function defined
         pass_field.on_submit = lambda e: tentar_login(e)
 
-        login_button = ft.ElevatedButton("Entrar", width=250, color=ft.Colors.WHITE, bgcolor=ft.Colors.BLUE_700, on_click=tentar_login)
+        login_button = ft.ElevatedButton(
+            "Entrar",
+            width=250,
+            style=ft.ButtonStyle(
+                bgcolor={
+                    ft.ControlState.DEFAULT: "#B20000",
+                    ft.ControlState.HOVERED: ft.Colors.with_opacity(0.85, ft.Colors.WHITE),
+                },
+                color={
+                    ft.ControlState.DEFAULT: "#FFFFFF",
+                    ft.ControlState.HOVERED: "#B20000",
+                },
+                shape=ft.RoundedRectangleBorder(radius=8)
+            ),
+            on_click=tentar_login)
 
-        cadastrar_link = ft.TextButton("Cadastre-se", on_click=lambda _: carregar_cadastro())
+        cadastrar_link = ft.TextButton(
+            "Cadastre-se",
+            style=ft.ButtonStyle(
+                color={
+                    ft.ControlState.DEFAULT: "#B20000",
+                    ft.ControlState.HOVERED: "white",
+                }
+            ),
+            on_click=lambda _: carregar_cadastro())
 
         login_box = ft.Container(
             content=ft.Column(
@@ -278,7 +315,7 @@ def main(page: ft.Page):
             height=400,
             padding=30,
             border_radius=ft.border_radius.all(20),
-            bgcolor=ft.Colors.BLACK,
+            bgcolor= "#191919",
             shadow=ft.BoxShadow(spread_radius=2, blur_radius=14, color=ft.Colors.with_opacity(0.25, ft.Colors.WHITE), offset=ft.Offset(0, 10)),
         )
 
@@ -306,6 +343,7 @@ def main(page: ft.Page):
                 msg_nome.visible = False
             page.update()
 
+        # noinspection PyUnusedLocal
         def validar_usuario(e):
             texto = user_field.value.strip()
             if len(texto) < 5:
@@ -394,8 +432,32 @@ def main(page: ft.Page):
 
         pass_field.on_submit = lambda e: registrar(e)
 
-        cadastro_button = ft.ElevatedButton("Cadastrar", color=ft.Colors.WHITE, bgcolor=ft.Colors.BLUE_700, width=250, on_click=registrar)
-        voltar = ft.TextButton("Voltar", on_click=lambda _: carregar_login())
+        cadastro_button = ft.ElevatedButton(
+            "Cadastrar",
+            width=250,
+            on_click=registrar,
+            style=ft.ButtonStyle(
+                bgcolor={
+                    ft.ControlState.DEFAULT: "#B20000",
+                    ft.ControlState.HOVERED: ft.Colors.with_opacity(0.85, ft.Colors.WHITE),
+                },
+                color={
+                    ft.ControlState.DEFAULT: "#FFFFFF",
+                    ft.ControlState.HOVERED: "#B20000",
+                },
+                shape=ft.RoundedRectangleBorder(radius=8)
+            )
+        )
+
+        voltar = ft.TextButton(
+            "Voltar",
+            style=ft.ButtonStyle(
+            color={
+                ft.ControlState.DEFAULT: "#B20000",
+                ft.ControlState.HOVERED: "white",
+            }
+            ),
+            on_click=lambda _: carregar_login())
 
         box = ft.Container(
             content=ft.Column(
@@ -418,7 +480,7 @@ def main(page: ft.Page):
             height=430,
             padding=30,
             border_radius=ft.border_radius.all(20),
-            bgcolor=ft.Colors.BLACK,
+            bgcolor= "#191919",
             shadow=ft.BoxShadow(spread_radius=2, blur_radius=14, color=ft.Colors.with_opacity(0.25, ft.Colors.WHITE), offset=ft.Offset(0, 10)),
         )
 
@@ -427,7 +489,7 @@ def main(page: ft.Page):
     def carregar_chat():
         page.clean()
         page.title = "TecminiAI"
-        page.bgcolor = ft.Colors.BLACK
+        page.bgcolor = "#191919"
 
         def voltar():
             page.clean()
@@ -437,8 +499,26 @@ def main(page: ft.Page):
 
         drawer = ft.NavigationDrawer(
             controls=[
-                ft.Container(content=ft.TextButton("Limpar histórico", on_click=lambda _: app.limpar_historico()), padding=ft.padding.only(top=20)),
-                ft.Container(content=ft.TextButton("Sair", on_click=lambda _: voltar()), padding=ft.padding.only(top=10)),
+                ft.Container(content=ft.TextButton(
+                    "Limpar histórico",
+                    style=ft.ButtonStyle(
+                        color={
+                            ft.ControlState.DEFAULT: "white",
+                            ft.ControlState.HOVERED: "grey",
+                        }
+                    ),
+                    on_click=lambda _: app.limpar_historico()),
+                    padding=ft.padding.only(top=20)),
+                ft.Container(content=ft.TextButton(
+                    "Sair",
+                    style=ft.ButtonStyle(
+                        color={
+                            ft.ControlState.DEFAULT: "#B20000",
+                            ft.ControlState.HOVERED: "white",
+                        }
+                    ),
+                    on_click=lambda _: voltar()),
+                    padding=ft.padding.only(top=10)),
             ]
         )
 

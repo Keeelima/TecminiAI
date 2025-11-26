@@ -11,15 +11,13 @@
     ],
     "diretoria": {
       "diretor": "Gilson dos Anjos Ribeiro",
-      "vice_diretor": "Nome do Vice-diretor",
-      "coordenador": "Nome do Coordenador"
+      "vice_diretor": "Adriano (Diretor Administrativo)",
+      "coordenador": "Flávio Andrade Guardia (Coordenador DS)"
     }
   },
-
   "localizacao": {
     "endereco_completo": "Av. Nove de Julho, 745 - Jardim Pereira do Amparo - CEP: 12327-682 - Jacareí/SP"
   },
-
   "horarios": {
     "diurno": {
       "entrada": "07:10",
@@ -34,7 +32,6 @@
       "saida": "22:30"
     }
   },
-
   "cardapio_refeitorio": {
     "segunda": "Arroz, feijão e ovo",
     "terca": "Arroz, feijão preto e carne de porco",
@@ -42,77 +39,150 @@
     "quinta": "Arroz e frango",
     "sexta": "Arroz, feijão e ovo"
   },
-
+  "rematricula": {
+    "prazo": "09/12/2025 a 15/12/2025"
+  },
   "eventos": [
     "Feira tecnológica - Outubro",
     "Semana Paulo Freire - Setembro",
     "Simulado ENEM - Junho"
   ],
-
   "regras_gerais": [
     "É obrigatório o uso de uniforme",
     "É proibido o uso de celular em sala"
   ],
-
-  "rematricula": {
-    "prazo": "09/12/2025 a 15/12/2025"
+  "infraestrutura": {
+    "salas_de_aula": 13,
+    "laboratorios": 7,
+    "predios": 2,
+    "biblioteca": true,
+    "extensao_biblioteca": true,
+    "auditorio": true,
+    "sala_maker": true,
+    "palco": true,
+    "materiais_agrimensura": true,
+    "sala_veterinaria": true,
+    "elevadores": 2,
+    "banheiros_femininos": 5,
+    "banheiros_masculinos": 5,
+    "refeitorio": 1,
+    "cantina": 1,
+    "campo": 1,
+    "quadra": 1,
+    "ginasio": 1
   },
-
+  "estatisticas": {
+    "professores_total": 48,
+    "alunos_m_tec": 560,
+    "alunos_modular": 160,
+    "alunos_total": 720
+  },
   "professores_lista_completa": [
-    "ADRIANA GALVÃO PÓVOA",
-    "ALEXANDRE DELGADO ALVES",
-    "ALINE OLIVEIRA FIGUEIREDO",
-    "ANA PAULA FERREIRA GUEDES DE SIQUEIRA",
-    "ANDRE LUIZ DA SILVA",
-    "ANDRESSA LEITE",
-    "ANTONIO ALMEIDA DUARTE",
-    "ANTONIO EGYDIO SAO THIAGO GRACA",
-    "ANTONIO RODOLFO DE SIQUEIRA",
-    "AQUILES FERREIRA MAXIMO DOS SANTOS",
-    "CARLOS DE OLIVEIRA",
-    "CARLOS EDUARDO ROCHA DE MELLO BEZERRA",
-    "CAROLINA DE OLIVEIRA BACCARO",
-    "CILENE OLIVEIRA",
-    "DANIELLA ALMEIDA BARROSO",
-    "EDEN PAULA DOS SANTOS",
-    "ELAINE MARIA RAGAZZI",
-    "ELISIANE ALVES DE OLIVEIRA",
-    "FABIANA REIS DE SANTANA E SANTOS",
-    "FABIO APARECIDO DA SILVA",
-    "FERNANDO CESAR DE MORAIS",
-    "FLAVIO ANDRADE GUARDIA",
-    "GILSON DOS ANJOS RIBEIRO",
-    "GISELI ANDREIA DA SILVA PEREIRA",
-    "JOAO DA MATA",
-    "JULIA NAOMI KANAZAWA",
-    "JULIANA TEIXEIRA ALVES",
-    "LETICIA TORRES DE CAMARGO DE OLIVEIRA CALABRARO",
-    "LUCIO APARECIDO RAMOS",
-    "LUIZ CARLOS FERREIRA JUNIOR",
-    "MARCELO GUIDO DE OLIVEIRA GUIMARAES",
-    "MARIA JULIA FERREIRA DE SIQUEIRA",
-    "MARIA REGINA DA SILVA SOUTO",
-    "MARIO DOMINGUES DE CASTRO",
-    "MARLUCE GAVIAO SACRAMENTO DIAS",
-    "MELQUISEDE ALVES DE OLIVEIRA",
-    "NAILDSON DOS SANTOS COELHO",
-    "NIKOLAS ARAUJO DA SILVA",
-    "RANGELMA CARVALHO NASCIMENTO",
-    "ROBERTO XAVIER PEREIRA JUNIOR",
-    "RODRIGO CESAR DA SILVA",
-    "RODRIGO MAGNO DE AQUINO MOYSES",
-    "ROSALIA GOMES FRANCISCO",
-    "ROSELENA APARECIDA LOSSOUL E BRAGA",
-    "SIBILA PAULA LEITE",
-    "TITO BARBOSA FILHO",
-    "URSULA ANDREIA MENGUI",
-    "VALERIO PAIOITI GONZAGA LIMA",
-    "VANESSA DA SILVA SANTOS FERREIRA",
-    "VINICIUS RAMOS NUNES DE OLIVEIRA",
-    "VITORIA CUNHA SALES DO NASCIMENTO",
-    "YAN DE OLIVEIRA MARTINS"
+    "Alexandre Delgado Alves",
+    "Aline Oliveira Figueiredo",
+    "Ana Paula Ferreira Guedes de Siqueira",
+    "Andressa Leite",
+    "Antonio Almeida Duarte",
+    "Antonio Egydio São Thiago Graça",
+    "Antonio Rodolfo de Siqueira",
+    "Aquiles Ferreira Máximo dos Santos",
+    "Carlos de Oliveira",
+    "Carlos Eduardo Rocha de Mello Bezerra",
+    "Carolina de Oliveira Baccaro",
+    "Cilene Oliveira",
+    "Daniella Almeida Barroso",
+    "Eden Paula dos Santos",
+    "Elaine Maria Ragazzi",
+    "Elisiane Alves de Oliveira",
+    "Fabiana Reis de Santana e Santos",
+    "Fabio Aparecido da Silva",
+    "Fernando Cesar de Morais",
+    "Flavio Andrade Guardia",
+    "Giseli Andreia da Silva Pereira",
+    "João da Mata",
+    "Julia Naomi Kanazawa",
+    "Juliana Teixeira Alves",
+    "Leticia Torres de Camargo de Oliveira Calabraro",
+    "Lucio Aparecido Ramos",
+    "Luiz Carlos Ferreira Junior",
+    "Marcelo Guido de Oliveira Guimarães",
+    "Maria Julia Ferreira de Siqueira",
+    "Maria Regina da Silva Souto",
+    "Mario Domingues de Castro",
+    "Melquisedec Alves de Oliveira",
+    "Naildson dos Santos Coelho",
+    "Nikolas Araujo da Silva",
+    "Rangelma Carvalho Nascimento",
+    "Roberto Xavier Pereira Junior",
+    "Rodrigo Cesar da Silva",
+    "Rodrigo Magno de Aquino Moyses",
+    "Rosalia Gomes Francisco",
+    "Roselena Aparecida Lossoul e Braga",
+    "Sibila Paula Leite",
+    "Tito Barbosa Filho",
+    "Úrsula Andréia Mengui",
+    "Valerio Paiotti Gonzaga Lima",
+    "Vanessa da Silva Santos Ferreira",
+    "Vinícius Ramos Nunes de Oliveira",
+    "Vitória Cunha Sales do Nascimento",
+    "Yan de Oliveira Martins"
   ],
-
+  "professores_turnos": {
+    "noite": [
+      "Andressa",
+      "Carlos Eduardo",
+      "Fabiana",
+      "Lúcio",
+      "Guido",
+      "Flavio",
+      "Melquisedec",
+      "Roberto",
+      "Tito",
+      "Úrsula"
+    ],
+    "dois_turnos": [
+      "Ana Paula",
+      "Aquiles",
+      "Carolina",
+      "Cilene",
+      "Éden Paula",
+      "Elisiane",
+      "Fernando",
+      "João da Mata",
+      "Juliana",
+      "Letícia",
+      "Maria Júlia",
+      "Nadilson",
+      "Nikolas",
+      "Vanessa",
+      "Vitória",
+      "Yan"
+    ],
+    "manha": [
+      "Alexandre Delgado",
+      "Aline Oliveira",
+      "Antonio Almeida",
+      "Antonio Egydio",
+      "Antonio Rodolfo",
+      "Carlos de Oliveira",
+      "Daniella Almeida",
+      "Elaine Maria",
+      "Fabio Aparecido",
+      "Gisele Andreia",
+      "Julia Naomi",
+      "Luiz Carlos",
+      "Maria Regina",
+      "Mario Domingues",
+      "Rangelma Carvalho",
+      "Rodrigo Cesar",
+      "Rodrigo Magno",
+      "Rosalia Gomes",
+      "Roselena Aparecida",
+      "Sibila Paula",
+      "Valerio Paiotti",
+      "Vinicius Ramos"
+    ]
+  },
   "cursos_cps": {
     "tecnicos_presenciais": [
       "Administração",
@@ -144,89 +214,99 @@
       "Logística"
     ]
   },
-
   "turmas": {
     "1DS": {
+      "alunos": {
+        "Turma_B": [
+          { "rm": 25101, "nome": "JONAS MIGUEL PEREZ CAMPOS" },
+          { "rm": 25183, "nome": "KAUÃ LOPES DIAS" },
+          { "rm": 25213, "nome": "KELVYN FÉLIX DOS SANTOS SILVA" },
+          { "rm": 25169, "nome": "KEVIN LIMA" },
+          { "rm": 25019, "nome": "LAIS BARBOSA DE MELLO" },
+          { "rm": 25209, "nome": "LUIZ FELIPE OLIVEIRA SALGADO" },
+          { "rm": 25042, "nome": "MARCELO YUCA JORGE SANTOS AMORIM" },
+          { "rm": 25234, "nome": "MARIA EDUARDA NOGUEIRA LIMA" },
+          { "rm": 25083, "nome": "MARINA ELOISE DOS SANTOS DA SILVA" },
+          { "rm": 25242, "nome": "MAYRA CARDOSO DE LIMA" },
+          { "rm": 25010, "nome": "MIGUEL FRANCISCO VIEIRA RODRIGUES" },
+          { "rm": 25182, "nome": "MURILO HENRIQUE MATHEUS ZARPELÃO" },
+          { "rm": 25077, "nome": "PAULO DI LUCCA FERREIRA" },
+          { "rm": 25049, "nome": "PEDRO SANTANA FERNANDES CARNEIRO" },
+          { "rm": 25122, "nome": "ROBERTA SANTOS SILVA" },
+          { "rm": 25071, "nome": "RONALDO MARTINS DE SOUZA" },
+          { "rm": 25168, "nome": "THEO DE CASTRO MARCELINO" },
+          { "rm": 25012, "nome": "WILLIAM DAVID DIAS PESTANA" },
+          { "rm": 25041, "nome": "YASMIN BENTO OLIVEIRA" }
+        ]
+      },
       "sala": "Sala 10",
       "professores": {
-        "matematica": "Professor Fernando",
-        "portugues": "Professora Elisiane",
-        "quimica": "Professor Melqsedec",
-        "fisica": "Professora Ursula",
-        "educacao_fisica": "Professora Maria Julia",
-        "artes": "Professora Ana Paula",
-        "programacao_web": "Professor Carlos - Lab3",
-        "banco_dados": "Professor Lúcio - Lab4",
-        "design_digital": "Professor Marcelo Guido - Lab2",
-        "tpa": "Professor Lúcio - Lab4",
-        "aps": "Professor Flávio - Lab1"
+        "matematica": "Fernando",
+        "portugues": "Elisiane",
+        "quimica": "Melquisedec",
+        "fisica": "Úrsula",
+        "educacao_fisica": "Maria Júlia",
+        "artes": "Ana Paula",
+        "programacao_web": "Carlos (Lab 3)",
+        "banco_dados": "Lúcio (Lab 4)",
+        "design_digital": "Marcelo Guido (Lab 2)",
+        "tpa": "Lúcio (Lab 4)",
+        "aps": "Flávio (Lab 1)"
       },
-
       "horarios_aulas": {
         "Turma_A": {
-          "Segunda-Feira": {
+          "Segunda": {
             "Artes": "18:00 - 19:40",
-            "portugues": "19:40 - 20:30 | 20:50 - 21:40",
-            "educacao_fisica": "21:40 - 22:30"
+            "Português": "19:40 - 20:30 | 20:50 - 21:40",
+            "Educação Física": "21:40 - 22:30"
           },
-          "Terca-Feira": {
-            "educacao_fisica": "18:00 - 18:50",
-            "design_digital": "18:50 - 20:30",
-            "programacao_web": "20:50 - 22:30"
+          "Terça": {
+            "Educação Física": "18:00 - 18:50",
+            "Design Digital": "18:50 - 20:30",
+            "Programação Web": "20:50 - 22:30"
           },
-          "Quarta-Feira": {
-            "portugues": "18:00 - 18:50",
-            "fisica": "18:50 - 20:30",
-            "matematica": "20:50 - 22:30"
+          "Quarta": {
+            "Português": "18:00 - 18:50",
+            "Física": "18:50 - 20:30",
+            "Matemática": "20:50 - 22:30"
           },
-          "Quinta_Feira": {
-            "tpa": "18:00 - 20:30",
-            "quimica": "20:50 - 22:30"
+          "Quinta": {
+            "TPA": "18:00 - 20:30",
+            "Química": "20:50 - 22:30"
           },
-          "Sexta-Feira": {
-            "nao_tem": "entra mais tarde as 18:50",
-            "aps": "20:50 - 22:30",
-            "banco-dados": "18:50 - 20:30"
+          "Sexta": {
+            "Entrada": "18:50",
+            "APS": "20:50 - 22:30",
+            "Banco de Dados": "18:50 - 20:30"
           }
         },
-
         "Turma_B": {
-          "Segunda-Feira": {
+          "Segunda": {
             "Artes": "18:00 - 19:40",
-            "portugues": "19:40 - 20:30 | 20:50 - 21:40",
-            "educacao_fisica": "21:40 - 22:30"
+            "Português": "19:40 - 20:30 | 20:50 - 21:40",
+            "Educação Física": "21:40 - 22:30"
           },
-          "Terca-Feira": {
-            "educacao_fisica": "18:00 - 18:50",
-            "programacao_web": "18:50 - 20:30",
-            "banco_dados": "20:50 - 22:30"
+          "Terça": {
+            "Educação Física": "18:00 - 18:50",
+            "Programação Web": "18:50 - 20:30",
+            "Banco de Dados": "20:50 - 22:30"
           },
-          "Quarta-Feira": {
-            "portugues": "18:00 - 18:50",
-            "fisica": "18:50 - 20:30",
-            "matematica": "20:50 - 22:30"
+          "Quarta": {
+            "Português": "18:00 - 18:50",
+            "Física": "18:50 - 20:30",
+            "Matemática": "20:50 - 22:30"
           },
-          "Quinta_Feira": {
-            "nao_tem": "entra mais tarde as 18:50",
-            "design_digital": "18:50 - 20:30",
-            "quimica": "20:50 - 22:30"
+          "Quinta": {
+            "Entrada": "18:50",
+            "Design Digital": "18:50 - 20:30",
+            "Química": "20:50 - 22:30"
           },
-          "Sexta-Feira": {
-            "tpa": "18:00 - 20:30",
-            "aps": "20:50 - 22:30"
+          "Sexta": {
+            "TPA": "18:00 - 20:30",
+            "APS": "20:50 - 22:30"
           }
         }
       }
-    },
-
-    "2DS": {
-      "sala": "Sala 07",
-      "professores": {
-        "matematica": "Profa. Vanessa",
-        "programacao": "Prof. João"
-      }
-    },
-
-    "3DS": {}
+    }
   }
 }
