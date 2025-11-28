@@ -5,7 +5,6 @@ import os
 
 def speak_text(text):
     try:
-        # Criar arquivo temporário
         with tempfile.NamedTemporaryFile(delete=False, suffix=".mp3") as tmp:
             temp_path = tmp.name
 
