@@ -5,19 +5,15 @@ import os
 
 from usuarios import carregar_memoria, salvar_memoria
 
-#               CONFIGURAR GEMINI
+# Configuração Gemini
 load_dotenv()
 genai.configure(api_key=os.getenv("GEMINI_API_KEY"))
 MODEL = "gemini-2.5-flash"
 
-# ======================================================
-# CARREGAR JSON DA ESCOLA
-# ======================================================
+# Carrega o json
 with open("dados_escola.json", "r", encoding="utf-8") as f:
     dados = json.load(f)
-# ======================================================
-#
-# ======================================================
+
 def extrair_nome(msg):
     msg = msg.lower()
 
@@ -41,9 +37,8 @@ def extrair_nome(msg):
 
 
 
-# ======================================================
-# PALAVRÕES PARA BLOQUEAR
-# ======================================================
+
+# Palavrões
 PALAVROES = [
     "bosta", "merda", "caralho", "fdp", "foda", "porra", "pqp", "vtnc", "vsf",
     "otario", "otária", "troxa", "trouxa", "burro", "burra", "cu", "arrombado"
@@ -59,9 +54,8 @@ def tem_palavrao(msg):
     return achou
 
 
-# ======================================================
-# CONSULTAS AO JSON
-# ======================================================
+
+# Consulta no json
 def buscar_info_escola(msg):
     msg_lower = msg.lower()
 
@@ -104,9 +98,7 @@ def buscar_info_escola(msg):
     return None
 
 
-# ======================================================
-# GEMINI COM MEMÓRIA DO USUÁRIO
-# ======================================================
+# Memória do usuário
 def responder_com_gemini(msg, usuario):
     model = genai.GenerativeModel(MODEL)
 
@@ -133,17 +125,18 @@ def responder_com_gemini(msg, usuario):
     - Não invente dados. Só responda com base no JSON.
     - Se o usuário pedir algo que não está no JSON, apenas diga que não há essa informação cadastrada.
     - Seja educado e natural.
+    - Se uma linha de resposta atingir 40 caracteres, continue na linha de baixo.
     """
 
     resposta = model.generate_content(prompt).text
 
-    # ------------ ATUALIZA A MEMÓRIA ------------
+
     nome_extraido = extrair_nome(msg)
     if nome_extraido:
         memoria["nome_usuario"] = nome_extraido
         salvar_memoria(usuario, memoria)
     else:
-        # Salva outras informações pessoais genéricas
+
         gatilhos = ["eu gosto", "moro", "estudo", "minha idade"]
         if any(g in msg.lower() for g in gatilhos):
             memoria["ultima_info"] = msg
@@ -155,7 +148,7 @@ def responder_com_gemini(msg, usuario):
 def eh_assunto_da_escola(msg):
     msg = msg.lower().strip()
 
-    # 1) Sempre permitido — não bloqueia NADA aqui
+
     cumprimentos = [
         "oi", "olá", "ola", "eae", "salve", "hey",
         "bom dia", "boa tarde", "boa noite",
@@ -165,11 +158,11 @@ def eh_assunto_da_escola(msg):
     if any(p in msg for p in cumprimentos):
         return True
 
-    # 2) Informações pessoais → sempre permitido (para salvar memória)
+
     if any(p in msg for p in ["eu gosto", "meu nome", "minha idade", "moro", "estudo"]):
         return True
 
-    # 3) Assuntos claramente da escola → permitido
+
     palavras_escola = [
         "etec", "escola", "cônego", "jose bento", "josé bento",
         "diretor", "diretora", "vice", "coordenador",
@@ -183,7 +176,7 @@ def eh_assunto_da_escola(msg):
     if any(p in msg for p in palavras_escola):
         return True
 
-    # 4) Assuntos claramente proibidos
+
     proibidos = [
         "python", "programar", "javascript", "html",
         "roblox", "minecraft", "fortnite",
@@ -197,24 +190,23 @@ def eh_assunto_da_escola(msg):
     if any(p in msg for p in proibidos):
         return False
 
-    # 5) Perguntas simples (leve) → permitido
+
     if len(msg.split()) <= 3:
         return True
 
-    # 6) Perguntas iniciadas com "quem", "qual", etc → permitido se não forem proibidas
+
     if msg.startswith(("quem", "quando", "qual", "como", "onde", "por que")):
-        # Se tiver palavras proibidas → bloqueia
+
         if any(p in msg for p in proibidos):
             return False
         return True
 
-    # Default: permitido (leve)
+
     return True
 
 
-# ======================================================
-# FUNÇÃO PRINCIPAL (APENAS ADICIONADO PARAM USUARIO)
-# ======================================================
+
+# Função principal
 def responder(msg, usuario):
     msg = msg.strip()
     if not msg:
@@ -223,14 +215,14 @@ def responder(msg, usuario):
     if tem_palavrao(msg):
         return "Por favor, mantenha o respeito. Não posso responder com palavrões."
 
-    # 1️⃣ JSON da escola
+    #json escola
     info = buscar_info_escola(msg)
     if info:
         return info
 
-    # 2️⃣ Filtro leve: só bloqueia quando NÃO for escola e NÃO for cumprimentos
+
     if not eh_assunto_da_escola(msg):
         return "Só posso responder perguntas relacionadas à Etec, à escola ou assuntos educacionais."
 
-    # 3️⃣ Enviar para o Gemini (personalizado por usuário)
+
     return responder_com_gemini(msg, usuario)

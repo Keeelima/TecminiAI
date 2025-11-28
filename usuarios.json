@@ -1,12 +1,10 @@
 {
     "users": [
         {
-            "nome": "kelvyn",
-            "username": "bloodspider",
-            "password": "12345",
-            "memory": {
-                "nome_usuario": "Kevin"
-            }
+            "nome": "kevin",
+            "username": "kevin",
+            "password": "kevin",
+            "memory": {}
         }
     ]
 }

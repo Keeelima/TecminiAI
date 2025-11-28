@@ -7,9 +7,7 @@ from usuarios import validar_login, criar_usuario, usuario_existe
 from voice import speak_text
 
 text_resp = None
-# ---------------------------------------------------
-# Função segura para UI
-# ---------------------------------------------------
+
 def get_scheduler(page: ft.Page):
     if hasattr(page, "call_from_thread"):
         return page.call_from_thread
@@ -21,9 +19,7 @@ def get_scheduler(page: ft.Page):
         return lambda fn: fn()
 
 
-# ---------------------------------------------------
-# CHAT (ChatApp substituído pelo novo com suporte a formatação)
-# ---------------------------------------------------
+# Chat inteiro
 class ChatApp(ft.Column):
     def __init__(self, page, drawer=None):
         super().__init__()
@@ -61,12 +57,12 @@ class ChatApp(ft.Column):
 
         self.controls = [self.chat_area, input_bar]
 
-    # limpar histórico
+
     def limpar_historico(self):
         self.chat_area.controls.clear()
         self.page.update()
 
-    # envio de mensagem (usuário)
+
     def send_message(self, e):
         texto = (self.new_message.value or "").strip()
         if not texto:
@@ -76,7 +72,7 @@ class ChatApp(ft.Column):
         self.send_button.disabled = True
         self.page.update()
 
-        # bolha do usuário usando format_text para permitir rich text caso necessário
+
         user_bubble = ft.Row(
             alignment=ft.MainAxisAlignment.END,
             controls=[
@@ -97,7 +93,7 @@ class ChatApp(ft.Column):
 
         threading.Thread(target=self.bot_reply, args=(texto,), daemon=True).start()
 
-    # função auxiliar que converte texto com **negrito** e [label](url) e retorna um Row
+
     def format_text(self, text):
         """
         Converte **negrito** e [link](https://...) em widgets Flet.
@@ -106,7 +102,7 @@ class ChatApp(ft.Column):
         parts = []
         i = 0
 
-        # primeiro processa links
+
         link_pat = re.compile(r"\[(.*?)]\((.*?)\)")
         for match in link_pat.finditer(text):
             start, end = match.span()
@@ -115,7 +111,7 @@ class ChatApp(ft.Column):
 
             if start > i:
                 remaining = text[i:start]
-                # processa negrito no trecho anterior
+
                 parts.extend(self._split_bold_to_texts(remaining))
 
             parts.append(
@@ -127,13 +123,13 @@ class ChatApp(ft.Column):
             )
             i = end
 
-        # resto do texto (apos últimos links)
+
         tail = text[i:]
         parts.extend(self._split_bold_to_texts(tail))
 
         return ft.Row(controls=parts, spacing=0, wrap=True)
 
-    # noinspection PyMethodMayBeStatic
+
     def _split_bold_to_texts(self, text):
         """Divide o texto em partes normais e **negrito** e retorna lista de ft.Text"""
         out = []
@@ -149,7 +145,7 @@ class ChatApp(ft.Column):
             out.append(ft.Text(text[j:], size=16))
         return out
 
-    # parse_message cria colunas de linhas, suportando listas com * e texto simples
+
     def parse_message(self, text):
         lines = text.split("\n")
         widgets = []
@@ -167,12 +163,12 @@ class ChatApp(ft.Column):
                 widgets.append(self.format_text(stripped))
         return widgets
 
-    # bolha do bot (usa parse_message)
+    # bolha do bot
     def create_bot_bubble(self, raw_text):
         # Processa o texto do bot (links, negrito, listas etc)
         content = self.parse_message(raw_text)
 
-        # Botão de "ouvir" (por enquanto só chama speak_text)
+
         speak_btn = ft.IconButton(
             icon=ft.Icons.VOLUME_UP,
             icon_color="#B20000",
@@ -180,7 +176,7 @@ class ChatApp(ft.Column):
             on_click=lambda *args: speak_text(raw_text)
         )
 
-        # Retorna a bolha com o texto + botão
+
         return ft.Row(
             alignment=ft.MainAxisAlignment.START,
             controls=[
@@ -196,18 +192,22 @@ class ChatApp(ft.Column):
                             speak_btn
                         ],
                         alignment=ft.MainAxisAlignment.START,
-                        vertical_alignment=ft.CrossAxisAlignment.START
+                        vertical_alignment=ft.CrossAxisAlignment.START,
                     ),
+
+                    # ⬇⬇ IMPORTANTE: largura adaptável
+                    width=600,  # usa 70% da largura da tela
+                    expand=False,
+
                     bgcolor=ft.Colors.with_opacity(0.3, "WHITE"),
                     padding=12,
                     border_radius=ft.border_radius.all(12),
                     margin=ft.margin.only(right=80),
-                    width=600,
                 )
             ],
         )
 
-    # simulador de reply do bot (chamada API)
+    # Chama API
     def bot_reply(self, user_text):
         global usuario_logado  # <-- obrigatório para acessar o usuário logado
 
@@ -226,7 +226,7 @@ class ChatApp(ft.Column):
             ],
         )
 
-        # adicionar "digitando..."
+
         self._schedule(lambda: self.show_typing(typing))
 
         try:
@@ -234,7 +234,7 @@ class ChatApp(ft.Column):
         except Exception as e:
             resposta = f"Erro ao gerar resposta: {e}"
 
-        # mostrar resposta
+
         self._schedule(lambda: self.show_bot_reply(typing, resposta))
 
     def show_typing(self, typing_row):
@@ -258,11 +258,10 @@ class ChatApp(ft.Column):
         self.page.update()
 
 
-# ---------------------------------------------------
-# TELA DE LOGIN + CADASTRO + CHAT
-# ---------------------------------------------------
+
+# Tela de login + cadastro
 def main(page: ft.Page):
-    # abrir fullscreen e estilo base
+
     page.window_full_screen = True
     page.padding = 20
     page.bgcolor = "#191919"
@@ -274,7 +273,7 @@ def main(page: ft.Page):
         user_field = ft.TextField(label="Usuário", width=250, max_length=20)
         pass_field = ft.TextField(label="Senha", password=True, can_reveal_password=True, width=250, max_length=30)
 
-        # permitir ENTER em usuário para focar senha; ENTER em senha tenta login
+
         user_field.on_submit = lambda e: pass_field.focus()
 
         error_text = ft.Text("", color=ft.Colors.RED, visible=False)
@@ -288,13 +287,13 @@ def main(page: ft.Page):
             if validar_login(user, pwd):
                 usuario_logado = user
                 print("Logado como:", usuario_logado)
-                carregar_chat()  # ← mantém o que já existia
+                carregar_chat()
             else:
                 error_text.value = "Usuário ou senha incorretos."
                 error_text.visible = True
                 page.update()
 
-        # set pass_field.on_submit after function defined
+
         pass_field.on_submit = lambda e: tentar_login(e)
 
         login_button = ft.ElevatedButton(
@@ -353,12 +352,12 @@ def main(page: ft.Page):
         user_field = ft.TextField(label="Usuário", width=250, max_length=20)
         pass_field = ft.TextField(label="Senha", password=True, can_reveal_password=True, width=250, max_length=30)
 
-        # MENSAGENS DE VALIDAÇÃO (embaixo de cada input)
+
         msg_nome = ft.Text("", color=ft.Colors.RED, visible=False, size=12)
         msg_user = ft.Text("", color=ft.Colors.RED, visible=False, size=12)
         msg_senha = ft.Text("", color=ft.Colors.RED, visible=False, size=12)
 
-        # validators on-blur
+
         def validar_nome(e):
             texto = nome_field.value.strip()
             if len(texto) < 5:
@@ -368,7 +367,7 @@ def main(page: ft.Page):
                 msg_nome.visible = False
             page.update()
 
-        # noinspection PyUnusedLocal
+
         def validar_usuario(e):
             texto = user_field.value.strip()
             if len(texto) < 5:
@@ -390,12 +389,12 @@ def main(page: ft.Page):
                 msg_senha.visible = False
             page.update()
 
-        # ativa validação ao perder foco
+
         nome_field.on_blur = validar_nome
         user_field.on_blur = validar_usuario
         pass_field.on_blur = validar_senha
 
-        # fluxo ENTER
+
         nome_field.on_submit = lambda e: user_field.focus()
         user_field.on_submit = lambda e: pass_field.focus()
 
@@ -452,7 +451,7 @@ def main(page: ft.Page):
             msg.visible = True
             page.update()
 
-            # volta para login após 1s
+
             threading.Thread(target=lambda: (sleep(1), carregar_login()), daemon=True).start()
 
         pass_field.on_submit = lambda e: registrar(e)
